@@ -1,6 +1,6 @@
 {
   "name": "jph",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "JavaScript Hypertext Preprocessor",
   "main": "index.js",
   "scripts": {

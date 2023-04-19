@@ -90,14 +90,28 @@ The last expression between the special tags is returned to the HTML content, fo
 </div>
 ```
 
+If you do not want to return the value of the expression, then you must add an empty string before the closing characters of the tags:
+
+```php
+<div>
+  <?
+    var number = 10
+    number + 6
+  ''?> // an empty string is returned
+</div>
+```
+
 <br>
 
-Variables declared with the **var** keyword are available in any special tags within the same file. Variables declared with the **const** or **let** keywords are only available within special tags:
+Variables declared with the **var** keyword are available in any special tags within the same file.
+
+Variables declared with the **const** or **let** keywords are only accessible within the special tags within which they were declared:
 
 ```php
 <?
   var a = 1 // available within file
   let b = 2 // available within tags
+  const c = 3 // available within tags
 ?>
 ```
 
@@ -105,7 +119,7 @@ To exchange data between different files, a special $GLOBALS object is used, as 
 
 ```php
 <?
-  $GLOBALS.myProp = 'ok' // available within application
+  $GLOBALS.age = 28 // available within application
 ?>
 ```
 
