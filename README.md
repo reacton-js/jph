@@ -52,3 +52,85 @@ JavaScript Hypertext Preprocessor
   </footer>
 </html>
 ```
+
+<br>
+
+#### Install
+
+```
+npm i
+```
+
+#### Start
+
+```
+node index
+```
+
+<br>
+
+Site files are located in the *htdocs* directory. The main site file is called *index.html*.
+
+The executable JavaScript code is located between special tags:
+
+```php
+<?
+  var number = 10
+?>
+```
+
+The last expression between the special tags is returned to the HTML content, for example:
+
+```php
+<div>
+  <?
+    var number = 10
+    number + 6 // return value 16
+  ?>
+</div>
+```
+
+<br>
+
+Variables declared with the **var** keyword are available in any special tags within the same file. Variables declared with the **const** or **let** keywords are only available within special tags:
+
+```php
+<?
+  var a = 1 // available within file
+  let b = 2 // available within tags
+?>
+```
+
+To exchange data between different files, a special $GLOBALS object is used, as shown below:
+
+```php
+<?
+  $GLOBALS.myProp = 'ok' // available within application
+?>
+```
+
+<br>
+
+To access the [request](https://expressjs.com/en/api.html#req) object, the $_REQUEST global variable is used, for example:
+
+```php
+<?
+  var fileName = ($_REQUEST.path === '/') ? 'home' : $_REQUEST.path.slice(1)
+?>
+```
+
+To include HTML files, use the **include()** function with one argument:
+
+```php
+<? include('includes/' + fileName + '.html') ?>
+```
+
+<br>
+
+By default, the server runs in fancy URLs mode. Access to the pages of the site is formed dynamically, through access to the main file *index.html*.
+
+To switch the server to static mode, change the value of the **FancyURLs** constant to **false** in the *index.js* file as shown below:
+
+```js
+const FancyURLs = false // includes fancy URLs
+```
