@@ -3,8 +3,8 @@ const path = require('path')
 const express = require("express")
 const port = process.env.PORT || 3000
 const app = express()
-
 const regTags = /<\?([^]*?)\?>/g // шаблон поиска специальных тегов
+const FancyURLs = true // включает красивые URLs
 
 // определить функцию подключения и обработки содержимого html-файлов
 const include = (filename, request, charset = 'utf8') => {
@@ -14,9 +14,16 @@ const include = (filename, request, charset = 'utf8') => {
     // получить и вернуть запрашиваемый файл
     return fs.readFileSync(__dirname + '/htdocs' + (filename[0] === '/' ? filename : '/' + filename), charset)
       .replace(regTags, (_, fix) => exec.next(fix).value) // обработать содержимое специальных тегов
-  } catch (error) {
-    // если файл не найден, то вернуть страницу 404
-    return fs.readFileSync(__dirname + '/htdocs/404.html', charset)
+  }
+  // если файл не найден
+  catch (error) {
+    // если красивые URLs включены
+    if (FancyURLs) {
+      return '<h2>Not Found</h2>' // вернуть сообщение об ошибке
+    } else {
+      // иначе, вернуть страницу 404
+      return fs.readFileSync(__dirname + '/htdocs/404.html', charset)
+    }
   }
 }
 
@@ -28,8 +35,6 @@ app.use(express.static(__dirname + '/htdocs/public'))
 
 // определить обработчик запроса фавикона
 app.get('/favicon.ico', (_, response) => response.sendStatus(204))
-
-const FancyURLs = true // включает красивые URLs
 
 // определить обработчик поступающих запросов
 app.use((request, response) => {
