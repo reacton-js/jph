@@ -4,7 +4,7 @@ const express = require("express")
 const port = process.env.PORT || 3000
 const app = express()
 const regTags = /<\?([^]*?)\?>/g // шаблон поиска специальных тегов
-const FancyURLs = true // включает красивые URLs
+const FancyURLs = (process.argv[2] === 'static') ? false : true // включает красивые URLs
 
 // определить функцию подключения и обработки содержимого html-файлов
 const include = (filename, request, charset = 'utf8') => {

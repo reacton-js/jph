@@ -143,7 +143,13 @@ To include HTML files, use the **include()** function with one argument:
 
 By default, the server runs in fancy URLs mode. Access to the pages of the site is formed dynamically, through access to the main file *index.html*.
 
-To switch the server to static mode, change the value of the **FancyURLs** constant to **false** in the *index.js* file as shown below:
+To switch the server to static mode, start the server with the command:
+
+```
+node index static
+```
+
+or explicitly change the value of the **FancyURLs** constant to **false** in the *index.js* file, as shown below:
 
 ```js
 const FancyURLs = false // includes fancy URLs
