@@ -101,6 +101,16 @@ If you do not want to return the value of the expression, then you must add an e
 </div>
 ```
 
+If the return value is **undefined**, then an empty string will be returned instead:
+
+```php
+<div>
+  <?
+    var number = 10 // an empty string is returned
+  ?>
+</div>
+```
+
 <br>
 
 Variables declared with the **var** keyword are available in any special tags within the same file.
